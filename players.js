@@ -1,5 +1,4 @@
-{
-    "players": [
+let players = [
       {
         "name": "Lionel Messi",
         "photo": "https://cdn.sofifa.net/players/158/023/25_120.png",
@@ -416,5 +415,4 @@
         "positioning": 85
       }
     ]
-  }
   

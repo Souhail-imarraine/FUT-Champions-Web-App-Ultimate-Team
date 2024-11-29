@@ -4,118 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Document</title>
 </head>
 <body>
+
+    <div class="ihtiyat_player">
+
+
+
+    </div>
+
+    <div class="tactique">
+        <select id="tactiques">
+            <option value="choix...">choix...</option>
+            <option value="433">4-3-3</option>
+            <option value="442">4-4-2</option>
+        </select>
+    </div>
+
+
+    
     <section class="container">
+        <i class="fa-solid fa-plus" id="afficherFormIcon"></i>
+            
         <div class="card_player_one">
-            <div class="player_card">
+            <div class="player_card" id="attaquant">
+
+            </div>
+            <div class="player_card" id="centerPlayer">
+               
+            </div>
+            <div class="player_card" id="defenceur">
                 
             </div>
-            <div class="player_card ">
-
+            <div class="player_card" id="Goal">
+               
             </div>
-            <div class="player_card ">
-
-            </div>
-            <div class="player_card ">
-                <div class="player">
-                    <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                    <h3 class="name_player">Messi</h3>
-                    <div class="flag_club_logo">
-                        <h2 class="position">RW</h2>
-                        <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                        <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                    </div>
-                </div>
-                <div class="player">
-                    <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                    <h3 class="name_player">Messi</h3>
-                    <div class="flag_club_logo">
-                        <h2 class="position">RW</h2>
-                        <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                        <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                    </div>
-                </div>
-                <div class="player">
-                    <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="" class="image_player">
-                    <h3 class="name_player">Messi</h3>
-                    <div class="flag_club_logo">
-                        <h2 class="position">RW</h2>
-                        <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                        <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                    </div>
-                </div>
-                <div class="player">
-                    <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                    <h3 class="name_player">Messi</h3>
-                    <div class="flag_club_logo">
-                        <h2 class="position">RW</h2>
-                        <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                        <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                    </div>
-                    <div class="info_player">  
-                        <p><strong class="rt">93</strong> </p>  
-                        <div class="child_info">
-                            <p class="info">PAC :<span>85</span></p>  
-                            <p class="info">SHO :<span>92</span></p>  
-                            <p class="info">PAS :<span>91</span></p>  
+        </div>
+    </section>
+    <section class="container_form">  
+        <div class="form-section">  
+            <i class="fa-solid fa-xmark" id="afficherFormIconForm"></i>
+            <h2 class="h2_text_form">Player Form</h2>  
+            <p class="error_validation"></p>  
+            <form name="playerForm">  
+                <div class="flex-container">  
+                    <!-- First Part: Player Information -->  
+                    <div class="flex-item info-section">  
+                        <div class="container_one_form">  
+                            <label for="playerName">Player Name:</label>  
+                            <input type="text" id="playerName" name="playerName" placeholder="Enter player name">  
+                        </div>  
+                        <div>  
+                            <label for="playerClub">Club:</label>  
+                            <input type="text" id="playerClub" name="playerClub" placeholder="Enter club name">  
+                        </div>  
+                        <div>  
+                            <label for="playerNationality">Nationality:</label>  
+                            <input type="text" id="playerNationality" name="playerNationality" placeholder="Enter nationality">  
+                        </div>  
+                        <div class="attribute-input">  
+                            <label for="rating">Rating:</label>
+                            <input type="number" id="rating" name="playerRating" min="0" max="100" placeholder="91" >
                         </div>
-                        <div class="child_info">
-                            <p class="info">DRI: <span>95</span></p>  
-                            <p class="info">DEF:<span>35</span></p>  
-                            <p class="info" id="phy">PHY:<span>65</span></p>  
-                        </div>
+                        <div class="container_one_form">  
+                            <label for="playerPosition">Position:</label>  
+                            <select id="playerPosition" name="playerPosition" required>  
+                                <option value="">Sélectionnez une position</option>  
+                                <option value="GK">Gardien (GK)</option>  
+                                <option value="CB">Défenseur Central (CB)</option>  
+                                <option value="LB">Latéral Gauche (LB)</option>  
+                                <option value="RB">Latéral Droit (RB)</option>  
+                                <option value="CM">Milieu Central (CM)</option>  
+                                <option value="LM">Milieu Gauche (LM)</option>  
+                                <option value="RM">Milieu Droit (RM)</option>  
+                                <option value="LW">Ailier Gauche (LW)</option>  
+                                <option value="RW">Ailier Droit (RW)</option>  
+                                <option value="ST">Attaquant (ST)</option>  
+                            </select>  
+                        </div>  
                     </div>  
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="container_form">
-        <div class="form-section">
-            <h2>Player Form</h2>
-            <form>
-                <label for="playerName">Player Name:</label>
-                <input type="text" id="playerName" name="playerName" placeholder="Enter player name" required>
-                <label for="playerPosition">Position:</label>
-                <select id="playerPosition" name="playerPosition" required>
-                    <option value="ST">Striker</option>
-                    <option value="LW">Left Winger</option>
-                    <option value="RW">Right Winger</option>
-                    <option value="CM">Central Midfielder</option>
-                    <option value="GK">Goalkeeper</option>
-                </select>
-        
-                <label for="playerNationality">Nationality:</label>
-                <input type="text" id="playerNationality" name="playerNationality" placeholder="Enter nationality" required>
-        
-                <label for="playerClub">Club:</label>
-                <input type="text" id="playerClub" name="playerClub" placeholder="Enter club name" required>
-        
-                <label for="playerRating">Rating:</label>
-                <input type="number" id="playerRating" name="playerRating" min="1" max="99" placeholder="Enter rating (1-99)" required>
-        
-                <label for="playerPace">Pace:</label>
-                <input type="number" id="playerPace" name="playerPace" min="0" max="99" placeholder="Enter pace (0-99)" required>
-        
-                <label for="playerShooting">Shooting:</label>
-                <input type="number" id="playerShooting" name="playerShooting" min="0" max="99" placeholder="Enter shooting (0-99)" required>
-        
-                <label for="playerPassing">Passing:</label>
-                <input type="number" id="playerPassing" name="playerPassing" min="0" max="99" placeholder="Enter passing (0-99)" required>
-        
-                <label for="playerDribbling">Dribbling:</label>
-                <input type="number" id="playerDribbling" name="playerDribbling" min="0" max="99" placeholder="Enter dribbling (0-99)" required>
-        
-                <label for="playerDefending">Defending:</label>
-                <input type="number" id="playerDefending" name="playerDefending" min="0" max="99" placeholder="Enter defending (0-99)" required>
-        
-                <label for="playerPhysical">Physical:</label>
-                <input type="number" id="playerPhysical" name="playerPhysical" min="0" max="99" placeholder="Enter physical (0-99)" required>
+    
 
-                <button type="submit">Add Player</button>
-            </form>
-        </div>
-    </section>
+
+                    <div class="flex-item attributes-section">  
+                        <div class="container_info_form">  
+                           
+
+
+                        </div>  
+                    </div>  
+                </div>  
+                <button type="submit" id="Add_player">Add Player</button>  
+            </form>  
+        </div>  
+    </section>  
+    
+
+
+    <script src="players.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

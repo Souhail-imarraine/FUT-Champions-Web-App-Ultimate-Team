@@ -26,6 +26,7 @@ body {
     background: url(/img/view-empty-soccer-stadium-with-fantasy-dreamy-sky.jpg);
     background-position: center;
     background-size: cover;
+    position: relative;
 
 }
 
@@ -34,8 +35,8 @@ body {
     height: inherit;
     /* background: linear-gradient(135deg, #ffcf33, #e8b023); */
     /* overflow: hidden; */
-    position: relative;
-    top: 10px;
+    margin: 20px;
+   
 }
 
 .player_card {
@@ -45,7 +46,6 @@ body {
     display: flex;
     /* flex-direction: column; */
     justify-content: center;
-    border: 2px solid white;
 }
 
 
@@ -63,26 +63,121 @@ body {
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
 }
 
-.container_form {
-    width: 100%;
-    max-width: 500px;
-    background: #fff;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+/* style form */
+
+.h2_text_form {
+    color: #e8b023;
+    text-align: center;
 }
+.container_form {  
+    width: 80%; 
+    margin: 20px auto; 
+    padding: 20px;   
+    background-color: rgba(255, 255, 255, 0.344);
+    border-radius: 10px;  
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
+    position: absolute;
+    display: none; 
+    z-index: 999;
+} 
+
+.flex-container {  
+    display: flex;  
+    justify-content: space-between;  
+    flex-wrap: wrap;  
+    margin-bottom: 20px; 
+}   
+
+.flex-item {  
+    flex: 1; 
+    min-width: 260px; 
+    padding: 15px;  
+}  
+
+
+.info-section {  
+    background-color: #eaf6fb; 
+    border: 1px solid #b3d7ff;  
+    border-radius: 8px;  
+    margin-right: 10px;   
+}  
+
+.attributes-section {  
+    background-color: #fff9e6; 
+    border: 1px solid #f2c94c;  
+    border-radius: 8px;  
+}  
+
+.container_info_form, .container_one_form {  
+    margin-bottom: 15px;  
+}  
+
+.attribute-input {  
+    margin-bottom: 12px; 
+}  
+
+label {  
+    display: block;  
+    margin-bottom: 5px;  
+    font-weight: bold;  
+    color: #2c3e50;  
+}  
+
+input[type="text"],  
+input[type="number"],  
+input[type="file"],  
+select {  
+    width: 95%; 
+    padding: 10px;  
+    border: 1px solid #d1d1d1;  
+    border-radius: 4px;  
+    transition: border-color 0.3s; 
+}  
+
+input:focus,  
+select:focus {  
+    border-color: #3498db; 
+    outline: none; 
+}  
+
+button {  
+    background-color: #20005c;
+    color: white;  
+    padding: 12px 20px;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    transition: background-color 0.3s ease;  
+    font-size: 16px; 
+}  
+
+button:hover {  
+    background-color: #218838; 
+}  
+
+.error_validation {  
+    color: #ff4d4d;  
+    font-size: 14px; 
+    margin-bottom: 10px; 
+} 
+
 
 
 
 .player {
     width: 150px;
     height: 100%;
-    background-color: #ff8c004d;
+    /* background-color: #00000085; */
     background-image: url(/img/p_rare_gold.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 90px;
     position: relative;
+    cursor: pointer;
+}
+.player:hover {
+    transform: scale(1.2);
+    background-color: #ff000048;
 }
 
 .image_player {
@@ -93,10 +188,18 @@ body {
 }
 
 .name_player {
+    background-color: #ffee37;
+    width: 64.2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
-    font-size: 10px;
-    top: 78px;
-    left: 69px;
+    font-size: 8px;
+    top: 80px;
+    left: 52px;
+    overflow: hidden;
+    font-size: 5px;
+    text-align: center;
 }
 
 .info_player {
@@ -116,14 +219,67 @@ body {
     top: 25px;
     right: 64px;
     font-size: 12px;
-    background-color: greenyellow;
+    background-color: rgb(255, 255, 255);
     border-bottom-left-radius: 10px;
 }
 
 .child_info {
     /* position: absolute; */
     position: relative;
+}
 
+.ihtiyat_player {  
+    display: flex;  
+    justify-content: flex-start;  
+    align-items: center;  
+    background-color: #ffffff; 
+    border-radius: 15px;   
+    max-width: 90%;  
+    min-width: 90%;  
+    height: 200px;  
+    position: relative;  
+    top: 20px;  
+    padding: 20px;  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+    transition: background-color 0.3s; 
+    overflow-x: auto;
+    white-space: nowrap;  
+}  
+
+.ihtiyat_player:hover {  
+    background-color: #ffc25f;  
+}
+
+.fa-bars {
+    color: #FFD43B;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 42px;
+    width: 98%;
+}
+
+
+.fa-xmark {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: rgb(255, 0, 0);
+    font-size: xxx-large;
+    cursor: pointer;
+    z-index: 111;
+}
+
+#photoPlayer {
+   color: black;
+   background-color: rgb(211, 255, 129);
+}
+
+.error_validation {
+    color: red; 
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .info {
@@ -142,7 +298,23 @@ span{
     border-bottom-right-radius: 20px;
 }
 
+.fa-pen-to-square {
+    color: #60ff1e;
+    position: absolute;
+    left: 32px;
+    top: 5px;
+    font-size: small;
+    cursor: pointer;
+}
 
+.fa-delete-left{
+    color: #ff0000;
+    position: absolute;
+    left: 99px;
+    top: 4px;
+    font-size: small;
+    cursor: pointer;
+}
 .flag_club_logo {
     position: absolute;
     /* border: #ff6a00 solid; */
@@ -167,79 +339,71 @@ top: 40px;
 .club {
     width: 15px;
     /* position: absolute; */
-
 }
 
-.form-section h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 2rem;
-    color: #444;
-}
 
-.form-section label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #555;
-}
 
-.form-section input,
-.form-section select {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    font-size: 16px;
-    transition: all 0.3s ease;
-}
-
-.form-section input:focus,
-.form-section select:focus {
-    border-color: #ffcf33;
-    box-shadow: 0 0 8px rgba(255, 207, 51, 0.5);
-    outline: none;
-}
-
-.form-section button {
-    width: 100%;
-    padding: 15px;
-    background: linear-gradient(135deg, #ffb03b, #ff8c00);
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
+.fa-plus  {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: yellow;
+    font-size: xxx-large;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
+    z-index: 111;
 }
 
-.form-section button:hover {
-    background: linear-gradient(135deg, #ff8c00, #ff6a00);
-    transform: translateY(-3px);
+
+#afficherFormIconForm {
+display: block;
 }
 
-@media screen and  (max-width: 768px) {
-    .container_form {
-        width: 95%;
-    }
 
-    .card_player_one {
-        width: 100%;
-        height: 500px;
-    }
-    .player_card{
-        height: 28%;
-    }
+.tactique {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 20px;
+    width: 90%;
+    position: absolute;
+    top: 230px;
+    left: 80px;
+    z-index: 111;
+}
 
-    /* .player_card h3 {
-        font-size: 1.8rem;
-    } */
+#tactiques {
+    width: 200px;
+    height: 40px;
+    padding: 8px 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    background: transparent;
+    border: 2px solid #e8b023;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    color: white;
+}
 
-    .form-section h2 {
-        font-size: 1.6rem;
-    }
+#tactiques:hover {
+    border-color: #ff8c00;
+    color: white;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+#tactiques:focus {
+    outline: none;
+    border-color: #ff6a00;
+    box-shadow: 0 0 8px rgba(255, 106, 0, 0.8);
+}
+
+#tactiques option {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    background: #fff;
 }
 
 
@@ -284,5 +448,3 @@ top: 40px;
         width: 10px;
     }
 }
-
-

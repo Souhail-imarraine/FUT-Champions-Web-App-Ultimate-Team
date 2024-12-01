@@ -13,7 +13,6 @@ let defenceur = document.getElementById("defenceur");
 let Goal = document.getElementById("Goal");
 let playCard = document.querySelectorAll(".player_card");
 
-
 let ArrayGoals = [];
 let Defenseur = [];
 let Milieu = [];
@@ -22,605 +21,119 @@ let arrayAllPlayer = [];
 
 
 
-function tactique(){
-    tactiques.addEventListener("change", () => {
 
-        // make empty container     
-        attaquant.innerHTML = "";
-        centerPlayer.innerHTML = "";
-        defenceur.innerHTML = "";
-        Goal.innerHTML = "";
+let formations = [
+    {
+        formation: "442",
+        front: 2,
+        middle: 4,
+        last: 4,
+        goal: 1,
+    },
+    {
+        formation: "433",
+        front: 3,
+        middle: 3,
+        last: 4,
+        goal: 1,
+    }
+];
 
-        // get value Select 
-        let valueSelected = tactiques.value;
-    
-        if(valueSelected === "442"){
-    
-            attaquant.innerHTML =
-                `
-                 <div class="player" data-Positionnement="LW">
+let player_card =
+    `
+              <div class="player">
                         <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
                         <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="https://cdn.sofifa.net/players/020/801/25_120.png" alt="" class="image_player">
-                        <h3 class="name_player">Cristiano Ronaldo</h3>
+                        <img src="" alt="" class="image_player">
+                        <h3 class="name_player"></h3>
                         <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
+                            <h2 class="position"></h2>
+                            <img src="" alt="" class="img_flag">
+                            <img src="" alt="" class="club">
                         </div>
-                        <div class="info_player">
-                            <p><strong class="rt">93</strong></p>  
+                        <div class="info_player">  
+                            <p><strong class="rt"></strong></p>  
                             <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
+                                <p class="info">PAC :<span> </span></p>  
+                                <p class="info">SHO :<span> </span></p>  
+                                <p class="info">PAS :<span> </span></p>  
                             </div>
                             <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
+                                <p class="info"> DRI: <span> </span></p>  
+                                <p class="info"> DEF:<span> </span></p>  
+                                <p class="info" id="phy"> PHY:<span></span></p>  
                             </div>
                         </div>  
                     </div>
-    
-                    <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Kevin De Bruyne</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
+  `
+
+  let goalCard = `  
+                <div class="player GK"> 
+                    <i class="fa-solid fa-pen-to-square edit" style="color: #74C0FC;" ></i>
+                    <i class="fa-solid fa-delete-left delete" style="color: #ff0000;"></i>
+                    <img src="" alt="" class="image_player_added">
+                    <h3 class="name_player_added"></h3>
+                    <div class="flag_club_logo_added">
+                        <h2 class="position"></h2>
+                        <img src="" alt="" class="img_flag">
+                        <img src="" alt="" class="club">
                     </div>
-                `
-    
-                centerPlayer.innerHTML = `
-                    <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Messi</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
+                    <div class="info_player_added">  
+                        <p><strong class="rt"></strong></p>  
+                        <div class="child_info">
+                            <p class="info">DIV: <span></span></p>  
+                            <p class="info">HAD: <span></span></p>  
+                            <p class="info">KIK: <span></span></p>  
                         </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Messi</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
+                        <div class="child_info">
+                            <p class="info">REF: <span></span></p>  
+                            <p class="info">SPD: <span></span></p>  
                         </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Messi</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Messi</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                
-                `
-    
-                defenceur.innerHTML = `
-                     <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Messi</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Messi</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Messi</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Messi</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                `
-    
-                Goal.innerHTML = `
-                
-                     <div class="player GK">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Messi</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">GK</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                    </div>
-                
-                `
-    
-        }else if(valueSelected === "433") {
-    
-            attaquant.innerHTML =
-                `
-                 <div class="player" data-Positionnement="LW">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="https://cdn.sofifa.net/players/020/801/25_120.png" alt="" class="image_player">
-                        <h3 class="name_player">Cristiano Ronaldo</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                    </div>
-    
-                    <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Kevin De Bruyne</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                    </div>
-    
-                    <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Kevin De Bruyne</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                    </div>
-                `
-    
-                centerPlayer.innerHTML = `
-                    <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Messi</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Messi</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Messi</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Messi</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                
-                `
-    
-                defenceur.innerHTML = `
-                     <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Messi</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Messi</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Messi</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Messi</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">RW</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
+                    </div>  
+                </div>
+                    
                 `
 
-                Goal.innerHTML = `
-                
-                     <div class="player GK">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-                        <h3 class="name_player">Messi</h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position">GK</h2>
-                            <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt">93</strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> 85</span></p>  
-                                <p class="info">SHO :<span> 92</span></p>  
-                                <p class="info">PAS :<span> 91</span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> 95</span></p>  
-                                <p class="info"> DEF:<span> 35</span></p>  
-                                <p class="info" id="phy"> PHY:<span>65</span></p>  
-                            </div>
-                        </div>  
-                    </div>
-         `
+
+function cheakFormstion(formaa) {
+    formations.forEach((forma) => {
+        if (forma.formation == formaa) {
+            for (let i = 0; i < forma.front; i++) {
+                attaquant.innerHTML += player_card;
+            }
+            // middle players
+            for (let i = 0; i < forma.middle; i++) {
+                centerPlayer.innerHTML += player_card;
+            }
+            // last players
+            for (let i = 0; i < forma.last; i++) {
+                defenceur.innerHTML += player_card;
+            }
+            for (let i = 0; i < forma.goal; i++) {
+                Goal.innerHTML += goalCard;
+            }        
         }
     });
+}
+
+cheakFormstion("442");
+
+
+function tactique() {
+    tactiques.addEventListener("change", () => {
+        const valueSelected = tactiques.value;
+        if (valueSelected == "442") {
+            attaquant.innerHTML = "";
+            centerPlayer.innerHTML = "";
+            defenceur.innerHTML = "";
+            cheakFormstion("442");
+        }else if (valueSelected == "433"){
+            attaquant.innerHTML = "";
+            centerPlayer.innerHTML = "";
+            defenceur.innerHTML = "";
+            cheakFormstion("433");
+            }
+    })
 }
 
 tactique();
@@ -633,7 +146,6 @@ tactique();
 *****************************/
 
 let myForm = document.forms.playerForm;
-
 let position = myForm.playerPosition;
 
 
@@ -645,7 +157,7 @@ function playerPosition() {
     position.addEventListener("change", () => {
         let positionValue = position.value;
         // containerInfoForm.innerHTML = ""; 
-        
+
         if (positionValue === "GK") {
 
             containerInfoForm.innerHTML = `
@@ -682,8 +194,8 @@ function playerPosition() {
                     <input type="text" id="logo" name="logo" placeholder="lien logo">  
                 </div>  
             `;
-            
-        }else {
+
+        } else {
             containerInfoForm.innerHTML = `
 
                             <div class="attribute-input">  
@@ -733,36 +245,36 @@ function playerPosition() {
     });
 }
 
-playerPosition(); 
+playerPosition();
+
+let btnAddPlayer = document.getElementById("Add_player");
 
 
-
-
-function validationForm(){
-    myForm.addEventListener("submit", (e)=> {
+function validationForm() {
+    myForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        if(playerPosition){
+        if (playerPosition) {
             let inputs = myForm.querySelectorAll("input[type='number'], input[type='text'], input[type='file']");
             let errorValidate = document.querySelector('.error_validation');
             let valid = true;
             inputs.forEach(input => {
-                if(!input.value) {
-                    valid = false ;
+                if (!input.value) {
+                    valid = false;
                     input.style.borderColor = "red";
-                }else {
+                } else {
                     input.style.borderColor = "green";
                 }
             });
-
-            if(valid) {
-                errorValidate.textContent = "succes";
-                errorValidate.style.color = "green";
-
-
+            if (valid) {
+                   errorValidate.textContent = "succes";
+                    errorValidate.style.color = "green";
+                    
                 addPlayer();
                 afficherPlayer(arrayAllPlayer);
-
-            }else {
+                deletePlayer();
+                editPlayer();
+                e.preventDefault();
+            } else {
                 errorValidate.textContent = "all fields are required";
                 errorValidate.style.color = "red";
 
@@ -770,216 +282,279 @@ function validationForm(){
         }
 
     })
-    }
+}
 
 validationForm()
 
 
-let btnAddPlayer = document.getElementById("Add_player");
 
 function addPlayer(){
+    let name = myForm.playerName;
+    let playerClub = myForm.playerClub;
+    let playerNationality = myForm.playerNationality;
+    let playerRating = parseInt(myForm.playerRating.value) || 0;
+    let mySelect = myForm.playerPosition;
 
-        let name = myForm.playerName;
-        let playerClub = myForm.playerClub ;
-        let playerNationality = myForm.playerNationality;
-        let playerRating = parseInt(myForm.playerRating.value)|| 0;
-        let mySelect = myForm.playerPosition;
 
-    if(mySelect.value === "GK") {
-            let playerRating = parseInt(myForm.playerRating.value) || 0;
-            let diving = parseInt(myForm.diving.value) || 0;
-            let handling = parseInt(myForm.handling.value) || 0;
-            let kicking = parseInt(myForm.kicking.value) || 0;
-            let reflexes = parseInt(myForm.reflexes.value) || 0;
-            let speed = parseInt(myForm.speed.value) || 0;
-            let playerPosition = mySelect.value || "";
-            let photoPlayer = myForm.photoPlayer.value || "this file is not defined";
-            let flag = myForm.photoPlayer.value || "this flag is not defined";
-            let logo = myForm.logo.value || "this logo is not defined";
 
-            let player = {
-                name : name.value,
-                playerClub : playerClub.value,
-                playerNationality: playerNationality.value,
-                playerRating : playerRating,
-                playerPosition: playerPosition,
-                diving : diving,
-                handling : handling,
-                kicking: kicking,
-                reflexes : reflexes,
-                speed : speed,
-                photoPlayer: photoPlayer,
-                flag: flag,
-                logo: logo
-            }
-    
-            ArrayGoals.push(player);
+    if (mySelect.value === "GK") {
+        let playerRating = myForm.playerRating.value || 0;
+        let diving = myForm.diving.value || 0;
+        let handling = myForm.handling.value || 0;
+        let kicking = myForm.kicking.value || 0;
+        let reflexes = myForm.reflexes.value || 0;
+        let speed = myForm.speed.value || 0;
+        let playerPosition = mySelect.value;
+        let photoPlayer = myForm.photoPlayer.value || "this file is not defined";
+        let flag = myForm.photoPlayer.value || "this flag is not defined";
+        let logo = myForm.logo.value || "this logo is not defined";
+
+        let player = {
+            name: name.value,
+            playerClub: playerClub.value,
+            playerNationality: playerNationality.value,
+            playerRating: playerRating,
+            playerPosition: playerPosition,
+            diving: diving,
+            handling: handling,
+            kicking: kicking,
+            reflexes: reflexes,
+            speed: speed,
+            photoPlayer: photoPlayer,
+            flag: flag,
+            logo: logo
+        }
+
+        ArrayGoals.push(player);
+        arrayAllPlayer.push(player);
+
+    } else {
+
+        let pace = parseInt(myForm.pace.value) || 0;
+        let playerShooting = parseInt(myForm.playerShooting.value) || 0;
+        let playerPassing = parseInt(myForm.playerPassing.value) || 0;
+        let playerDribbling = parseInt(myForm.playerDribbling.value) || 0;
+        let playerDefending = parseInt(myForm.playerDefending.value) || 0;
+        let playerPhysical = parseInt(myForm.playerPhysical.value) || 0;
+        let playerPosition = mySelect.value || "";
+        let photoPlayer = myForm.photoPlayer.value || "this file is not defined";
+        let flag = myForm.flag.value || "this flag is not defined";
+        let logo = myForm.logo.value || "this logo is not defined";
+
+        let player = {
+            name: name.value,
+            playerClub: playerClub.value,
+            playerNationality: playerNationality.value,
+            playerRating: playerRating,
+            pace: pace,
+            playerPassing: playerPassing,
+            playerShooting: playerShooting,
+            playerPosition: playerPosition,
+            playerDribbling: playerDribbling,
+            playerDefending: playerDefending,
+            playerPhysical: playerPhysical,
+            photoPlayer: photoPlayer,
+            flag: flag,
+            logo: logo
+        }
+
+        if (mySelect.value === "ST" || mySelect.value === "LW" || mySelect.value === "RW") {
+            Attaquant.push(player);
             arrayAllPlayer.push(player);
-            console.log(ArrayGoals);
-            console.log(arrayAllPlayer);
-
-        }else {
-
-            let pace = parseInt(myForm.pace.value) || 0;
-            let playerShooting = parseInt(myForm.playerShooting.value) || 0;
-            let playerPassing = parseInt(myForm.playerPassing.value) || 0;
-            let playerDribbling = parseInt(myForm.playerDribbling.value) || 0;
-            let  playerDefending = parseInt(myForm.playerDefending.value) || 0;
-            let playerPhysical = parseInt(myForm.playerPhysical.value) || 0;
-            let playerPosition = mySelect.value || "";
-            let photoPlayer = myForm.photoPlayer.value || "this file is not defined";
-            let flag = myForm.flag.value || "this flag is not defined";
-            let logo = myForm.logo.value || "this logo is not defined";
-
-
-
-            console.log(pace);
-            console.log(playerShooting);
-            console.log(playerPassing);
-            console.log(playerDribbling);
-            console.log(playerDefending);
-            console.log(playerPhysical);
-            console.log(photoPlayer);
-
-
-            let player = {
-                name : name.value,
-                playerClub : playerClub.value,
-                playerNationality: playerNationality.value,
-                playerRating : playerRating,
-                pace : pace,
-                playerPassing : playerPassing,
-                playerShooting : playerShooting,
-                playerPosition: playerPosition,
-                playerDribbling: playerDribbling,
-                playerDefending : playerDefending,
-                playerPhysical : playerPhysical,
-                photoPlayer: photoPlayer,
-                flag : flag,
-                logo: logo
-            }
-
-            if(mySelect.value === "ST" || mySelect.value === "LW" || mySelect.value === "RW"){
-                Attaquant.push(player);
-                arrayAllPlayer.push(player);
-
-            }else if(mySelect.value === "RM" || mySelect.value === "LM" ||  mySelect.value === "CM"){
-                Milieu.push(player);
-                arrayAllPlayer.push(player);
-            }else{
-                Defenseur.push(player);
-                arrayAllPlayer.push(player);
-            }
-            console.log(Attaquant);
-
-            console.log(Milieu);
-            console.log(Defenseur);
-            console.log(arrayAllPlayer)
-        } 
-        
-        myForm.reset();
+        } else if (mySelect.value === "RM" || mySelect.value === "LM" || mySelect.value === "CM") {
+            Milieu.push(player);
+            arrayAllPlayer.push(player);
+        } else {
+            Defenseur.push(player);
+            arrayAllPlayer.push(player);
+        }
     }
+    myForm.reset();
+}
 
 
 
-    function afficherPlayer(arrayAllPlayer){
-        let containerRemplacement = document.querySelector(".ihtiyat_player");
+function afficherPlayer(arrayAllPlayer) {
+    let containerRemplacement = document.querySelector(".ihtiyat_player");
+    containerRemplacement.innerHTML = "";
 
-        arrayAllPlayer.forEach((e)=>{
+    arrayAllPlayer.forEach((e, index) => {
+        let singleCard = document.createElement("div");
+        singleCard.classList.add("single");
 
-                containerRemplacement.innerHTML = 
-                `
-                        <div class="player"> 
-                            <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                            <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                            <img src="${e.photoPlayer}" alt="" class="image_player">
-                            <h3 class="name_player">${e.name}</h3>
-                            <div class="flag_club_logo">
-                                <h2 class="position">${e.playerPosition}</h2>
-                                <img src="${e.flag}" alt="" class="img_flag">
-                                <img src="${e.logo}" alt="" class="clubgit ">
-                            </div>
-                            <div class="info_player">  
-                                <p><strong class="rt">${e.playerRating}</strong></p>  
-                                <div class="child_info">
-                                    <p class="info">PAC :<span> ${e.pace}</span></p>  
-                                    <p class="info">SHO :<span> ${e.playerShooting}</span></p>  
-                                    <p class="info">PAS :<span> ${e.playerPassing}</span></p>  
-                                </div>
-                                <div class="child_info">
-                                    <p class="info"> DRI: <span> ${e.playerDribbling}</span></p>  
-                                    <p class="info"> DEF:<span> ${e.playerDefending}</span></p>  
-                                    <p class="info" id="phy"> PHY:<span>${e.playerPhysical}</span></p>  
-                                </div>
-                            </div>  
+        if (e.playerPosition !== "GK") {
+            singleCard.innerHTML = `
+                <div class="player"> 
+                    <i class="fa-solid fa-pen-to-square" onclick="editPlayer(${index})" style="color: #74C0FC;" class="edit"></i>
+                    <i class="fa-solid fa-delete-left" style="color: #ff0000;" class="delete"></i>
+                    <img src="${e.photoPlayer}" alt="" class="image_player_added">
+                    <h3 class="name_player_added">${e.name}</h3>
+                    <div class="flag_club_logo_added">
+                        <h2 class="position">${e.playerPosition}</h2>
+                        <img src="${e.flag}" alt="" class="img_flag">
+                        <img src="${e.logo}" alt="" class="club">
+                    </div>
+                    <div class="info_player_added">  
+                        <p><strong class="rt">${e.playerRating}</strong></p>  
+                        <div class="child_info">
+                            <p class="info">PAC: <span>${e.pace}</span></p>  
+                            <p class="info">SHO: <span>${e.playerShooting}</span></p>  
+                            <p class="info">PAS: <span>${e.playerPassing}</span></p>  
                         </div>
-                `
-        });
-    }
+                        <div class="child_info">
+                            <p class="info">DRI: <span>${e.playerDribbling}</span></p>  
+                            <p class="info">DEF: <span>${e.playerDefending}</span></p>  
+                            <p class="info" id="phy">PHY: <span>${e.playerPhysical}</span></p>  
+                        </div>
+                    </div>  
+                </div>`;
+        } else {
+            singleCard.innerHTML = `
+                <div class="player GK"> 
+                    <i class="fa-solid fa-pen-to-square edit" onclick="editPlayer(${index})" style="color: #74C0FC;" ></i>
+                    <i class="fa-solid fa-delete-left delete" style="color: #ff0000;"></i>
+                    <img src="${e.photoPlayer}" alt="" class="image_player_added">
+                    <h3 class="name_player_added">${e.name}</h3>
+                    <div class="flag_club_logo_added">
+                        <h2 class="position">${e.playerPosition}</h2>
+                        <img src="${e.flag}" alt="" class="img_flag">
+                        <img src="${e.logo}" alt="" class="club">
+                    </div>
+                    <div class="info_player_added">  
+                        <p><strong class="rt">${e.playerRating}</strong></p>  
+                        <div class="child_info">
+                            <p class="info">DIV: <span>${e.diving}</span></p>  
+                            <p class="info">HAD: <span>${e.handling}</span></p>  
+                            <p class="info">KIK: <span>${e.kicking}</span></p>  
+                        </div>
+                        <div class="child_info">
+                            <p class="info">REF: <span>${e.reflexes}</span></p>  
+                            <p class="info">SPD: <span>${e.speed}</span></p>  
+                        </div>
+                    </div>  
+                </div>`;
+        }
 
-
-
+        containerRemplacement.appendChild(singleCard);
+    });
+}
 
 
 
 
 //***************** */ icon to affiche form ********************
 
-let myIconForm = document.getElementById("afficherFormIcon");  
-let containerForm = document.querySelector(".container_form");  
-let secondIconForm = document.getElementById("afficherFormIconForm");  
+let myIconForm = document.getElementById("afficherFormIcon");
+let containerForm = document.querySelector(".container_form");
+let secondIconForm = document.getElementById("afficherFormIconForm");
 
+function toggleForm() {
+    if (containerForm.style.display === "none") {
+        containerForm.style.display = "block";
+        myIconForm.classList.add("fa-xmark");
+        myIconForm.classList.remove("fa-plus");
+        myIconForm.style.display = "none";
+    } else {
+        containerForm.style.display = "none";
+        myIconForm.classList.add("fa-plus");
+        myIconForm.classList.remove("fa-xmark");
+        myIconForm.style.display = "block";
+    }
+}
 
-function toggleForm() {  
-    if (containerForm.style.display === "none") {  
-        containerForm.style.display = "block";  
-        myIconForm.classList.add("fa-xmark");  
-        myIconForm.classList.remove("fa-plus");  
-        myIconForm.style.display = "none";  
-    } else {  
-        containerForm.style.display = "none";  
-        myIconForm.classList.add("fa-plus");  
-        myIconForm.classList.remove("fa-xmark");  
-        myIconForm.style.display = "block";  
-    }  
-}  
-
-myIconForm.addEventListener("click", toggleForm);  
+myIconForm.addEventListener("click", toggleForm);
 secondIconForm.addEventListener("click", toggleForm);
 
 
 
+// delete 
+function deletePlayer() {
+    let btnIcon = document.querySelectorAll(".fa-delete-left");
+    btnIcon.forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+            var filter = arrayAllPlayer.findIndex(ele => ele.name.trim().toLowerCase() === e.target.parentNode.querySelector(".name_player_added").textContent.trim().toLowerCase());
+            console.log(filter);
+            if (filter > -1 && filter < arrayAllPlayer.length) {
+                arrayAllPlayer.splice(filter, 1);
+            }
+            afficherPlayer(arrayAllPlayer);
+        })
+    })
 
-// function return my cardPlayer
+}
 
-// function myCardPlayer(arrayAllPlayer){
 
-//     return `
-//                     <div class="player">
-//                         <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-//                         <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-//                         <img src="Lionel_Messi_fifa_21.webp" alt="" class="image_player">
-//                         <h3 class="name_player">Messi</h3>
-//                         <div class="flag_club_logo">
-//                             <h2 class="position">GK</h2>
-//                             <img src="/Flag_of_Argentina.svg.webp" alt="" class="img_flag">
-//                             <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="club">
-//                         </div>
-//                         <div class="info_player">  
-//                             <p><strong class="rt">93</strong></p>  
-//                             <div class="child_info">
-//                                 <p class="info">PAC :<span> 85</span></p>  
-//                                 <p class="info">SHO :<span> 92</span></p>  
-//                                 <p class="info">PAS :<span> 91</span></p>  
-//                             </div>
-//                             <div class="child_info">
-//                                 <p class="info"> DRI: <span> 95</span></p>  
-//                                 <p class="info"> DEF:<span> 35</span></p>  
-//                                 <p class="info" id="phy"> PHY:<span>65</span></p>  
-//                             </div>
-//                         </div>  
-//                     </div>
-//     `
-// }
+// edit
 
-// console.log(arrayAllPlayer);
+function editPlayer(i){
+    
+    const playerData = arrayAllPlayer[i];
+
+    const deleted = playerData.name;
+
+    console.log(deleted);
+
+    myForm.reset();
+    btnAddPlayer.style.display = "none";
+
+    myForm["playerPosition"].value = playerData.playerPosition;
+    myForm["photoPlayer"].value = playerData.photoPlayer;
+    myForm["flag"].value = playerData.flag;
+    myForm["logo"].value = playerData.logo;
+    myForm["playerClub"].value = playerData.playerClub;
+    myForm["playerNationality"].value = playerData.playerNationality;
+    myForm["playerRating"].value = playerData.playerRating;
+
+    if (playerData.playerPosition === "GK") {
+        myForm["playerName"].value = playerData.name;
+        myForm["diving"].value = playerData.diving;
+        myForm["handling"].value = playerData.handling;
+        myForm["kicking"].value = playerData.kicking;
+        myForm["reflexes"].value = playerData.reflexes;
+        myForm["speed"].value = playerData.speed;
+    } else {
+        myForm["playerName"].value = playerData.name;
+        myForm["pace"].value = playerData.pace;
+        myForm["playerShooting"].value = playerData.playerShooting;
+        myForm["playerPassing"].value = playerData.playerPassing;
+        myForm["playerDribbling"].value = playerData.playerDribbling;
+        myForm["playerDefending"].value = playerData.playerDefending;
+        myForm["playerPhysical"].value = playerData.playerPhysical;
+    }
+    toggleForm();
+
+    document.getElementById("edit_player").addEventListener("click",()=>{
+
+
+        playerData.playerPosition = myForm["playerPosition"].value;
+        playerData.photoPlayer = myForm["photoPlayer"].value;
+        playerData.flag = myForm["flag"].value ;
+        playerData.logo = myForm["logo"].value ;
+        playerData.playerClub = myForm["playerClub"].value ;
+        playerData.playerNationality = myForm["playerNationality"].value;
+        playerData.playerRating = myForm["playerRating"].value;
+        
+        if (playerData.playerPosition === "GK") {
+            playerData.name = myForm["playerName"].value;
+            playerData.diving = myForm["diving"].value ;
+            playerData.handling = myForm["handling"].value ;
+            playerData.kicking = myForm["kicking"].value;
+            playerData.reflexes = myForm["reflexes"].value;
+            playerData.speed = myForm["speed"].value;
+        } else {
+            playerData.name = myForm["playerName"].value;
+            playerData.pace = myForm["pace"].value;
+            playerData.playerShooting = myForm["playerShooting"].value;
+            playerData.playerPassing = myForm["playerPassing"].value;
+            playerData.playerDribbling = myForm["playerDribbling"].value ;
+            playerData.playerDefending = myForm["playerDefending"].value ;
+            playerData.playerPhysical = myForm["playerPhysical"].value;
+        }
+
+
+        containerForm.style.display = "none"
+
+    })
+    arrayAllPlayer = arrayAllPlayer.filter(element => element.name !== deleted);
+    console.log(arrayAllPlayer);
+}

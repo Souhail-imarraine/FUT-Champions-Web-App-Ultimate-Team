@@ -168,7 +168,7 @@ button:hover {
 .player {
     min-width: 150px;
     max-width: 150px;
-    background-image: url(/img/p_rare_gold.png);
+    background-image: url(img/p_rare_gold.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 90px;

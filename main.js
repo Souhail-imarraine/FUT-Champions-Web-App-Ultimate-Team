@@ -4,14 +4,13 @@
  * ******************************
 ************************************/
 
-
-
 let tactiques = document.getElementById("tactiques");
 let attaquant = document.getElementById("attaquant");
 let centerPlayer = document.getElementById("centerPlayer");
 let defenceur = document.getElementById("defenceur");
 let Goal = document.getElementById("Goal");
 let playCard = document.querySelectorAll(".player_card");
+
 
 let ArrayGoals = [];
 let Defenseur = [];
@@ -23,13 +22,13 @@ let arrayAllPlayer = [];
 // object forma position
 
 const formations = {
-    442: {
+    "442": {
         front: ["LW", "RW"],
         middle: ["LM", "CM", "CM", "RM"],
-        last: ["LB", "CM", "RB"],
+        last: ["LB", "CM", "CM", "RB"],
         goal: ["GK"],
     },
-    433: {
+    "433": {
         front: ["LW", "ST", "RW"],
         middle: ["LM", "CM", "RM"],
         last: ["LB", "CB", "CB", "RB"],
@@ -37,37 +36,62 @@ const formations = {
     },
 };
 
-
-const player_card = ` <div class="player empty" data-position="">
-                            <img src="" alt="" class="image_player"> 
-                            <h3 class="name_player"></h3> 
-                            <div class="flag_club_logo"> 
-                            <h2 class="position"></h2> 
+const player_card = ` 
+                    <div class="player">
+                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
+                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
+                        <img src="" alt="" class="image_player">
+                        <h3 class="name_player"></h3>
+                        <div class="flag_club_logo">
+                            <h2 class="position"></h2>
                             <img src="" alt="" class="img_flag">
-                                <img src="" alt="" class="club"> </div>
-                                <div class="info_player"> 
-                                    <p><strong class="rt"></strong></p>
-                                    <div class="child_info"> 
-                                        <p class="info">PAC :<span></span></p>
-                                        <p class="info">SHO :<span></span></p> 
-                                        <p class="info">PAS :<span></span></p> 
-                                    </div> <div class="child_info"> 
-                                        <p class="info"> DRI: <span></span></p>
-                                        <p class="info"> DEF:<span></span></p>
-                                        <p class="info" id="phy"> PHY:<span></span></p> 
-                                        </div> 
-                                    </div> 
-                        </div> `;
+                            <img src="" alt="" class="club">
+                        </div>
+                        <div class="info_player">  
+                            <p><strong class="rt"></strong></p>  
+                            <div class="child_info">
+                                <p class="info">PAC :<span></span></p>  
+                                <p class="info">SHO :<span></span></p>  
+                                <p class="info">PAS :<span></span></p>  
+                            </div>
+                            <div class="child_info">
+                                <p class="info"> DRI: <span></span></p>  
+                                <p class="info"> DEF:<span></span></p>  
+                                <p class="info" id="phy"> PHY:<span></span></p>  
+                            </div>
+                        </div>  
+                    </div> `;
 
-const goalCard = ` <div class="player empty GK" data-position="GK"> <img src="" alt="" class="image_player_added"> <h3 class="name_player_added"></h3> <div class="flag_club_logo_added"> <h2 class="position">GK</h2> <img src="" alt="" class="img_flag"> <img src="" alt="" class="club"> </div> <div class="info_player_added"> <p><strong class="rt"></strong></p> <div class="child_info"> <p class="info">DIV: <span></span></p> <p class="info">HAD: <span></span></p> <p class="info">KIK: <span></span></p> </div> <div class="child_info"> <p class="info">REF: <span></span></p> <p class="info">SPD: <span></span></p> </div> </div> </div> `;
-
-
+const goalCard = `
+                <div class="player empty GK" data-position="GK"> 
+                    <img src="" alt="" class="image_player_added"> 
+                    <h3 class="name_player_added"></h3> 
+                    <div class="flag_club_logo_added"> 
+                    <h2 class="position">GK</h2> 
+                    <img src="" alt="" class="img_flag"> 
+                    <img src="" alt="" class="club"> 
+                    </div> 
+                        <div class="info_player_added"> 
+                            <p><strong class="rt"></strong></p> 
+                            <div class="child_info"> 
+                                <p class="info">DIV: <span></span></p>
+                                <p class="info">HAD: <span></span></p>
+                                <p class="info">KIK: <span></span></p>
+                            </div> 
+                                <div class="child_info"> 
+                                <p class="info">REF: <span></span></p>
+                                
+                                <p class="info">SPD: <span></span></p> 
+                            </div> 
+                        </div>
+                    </div> 
+    `;
 
 // cheak forma 4-4-2 or 4-3-3
 
 function cheakFormstion(formation) {
     const forma = formations[formation];
-
+    
     attaquant.innerHTML = "";
     centerPlayer.innerHTML = "";
     defenceur.innerHTML = "";
@@ -80,80 +104,58 @@ function cheakFormstion(formation) {
         card.firstElementChild.setAttribute("data-position", position);
         attaquant.appendChild(card.firstElementChild);
     });
+
+
     forma.middle.forEach((position) => {
         let card = document.createElement("div");
         card.innerHTML = player_card;
         card.firstElementChild.setAttribute("data-position", position);
         centerPlayer.appendChild(card.firstElementChild);
     });
+
+
     forma.last.forEach((position) => {
         let card = document.createElement("div");
         card.innerHTML = player_card;
         card.firstElementChild.setAttribute("data-position", position);
         defenceur.appendChild(card.firstElementChild);
     });
+
+
+
     forma.goal.forEach((position) => {
         let card = document.createElement("div");
         card.innerHTML = goalCard;
         card.firstElementChild.setAttribute("data-position", position);
         Goal.appendChild(card.firstElementChild);
     });
-    document.querySelectorAll(".player.empty").forEach((el) => {
-        el.addEventListener("click", () => {
-            if (selectedPlayerIndex !== null) {
-                addToPosition(selectedPlayerIndex, el);
-                selectedPlayerIndex = null;
-            }
-        });
-    });
+
+    playCardss()
 }
+
 tactiques.addEventListener("change", () => {
     cheakFormstion(tactiques.value);
+    console.log(typeof tactiques.value);
 });
+
+
 cheakFormstion("442");
-
-
-function tactique() {
-    tactiques.addEventListener("change", () => {
-        const valueSelected = tactiques.value;
-        if (valueSelected == "442") {
-            attaquant.innerHTML = "";
-            centerPlayer.innerHTML = "";
-            defenceur.innerHTML = "";
-            cheakFormstion("442");
-        } else if (valueSelected == "433") {
-            attaquant.innerHTML = "";
-            centerPlayer.innerHTML = "";
-            defenceur.innerHTML = "";
-            cheakFormstion("433");
-        }
-    })
-}
-
-tactique();
-
 
 
 /* ***************************
 ***** validation form  ******
-*****************************
 *****************************/
 
 let myForm = document.forms.playerForm;
 let position = myForm.playerPosition;
 
-
-
-
 function playerPosition() {
     let containerInfoForm = document.querySelector(".container_info_form");
-
     position.addEventListener("change", () => {
         let positionValue = position.value;
         // containerInfoForm.innerHTML = ""; 
 
         if (positionValue === "GK") {
-
             containerInfoForm.innerHTML = `
                 <div class="attribute-input">  
                     <label for="diving">Diving:</label>
@@ -247,38 +249,46 @@ let btnAddPlayer = document.getElementById("Add_player");
 function validationForm() {
     myForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        if (playerPosition) {
-            let inputs = myForm.querySelectorAll("input[type='number'], input[type='text'], input[type='file']");
-            let errorValidate = document.querySelector('.error_validation');
-            let valid = true;
-            inputs.forEach(input => {
-                if (!input.value) {
-                    valid = false;
-                    input.style.borderColor = "red";
-                } else {
-                    input.style.borderColor = "green";
-                }
-            });
-            if (valid) {
-                errorValidate.textContent = "succes";
-                errorValidate.style.color = "green";
 
-                addPlayer();
-                afficherPlayer(arrayAllPlayer);
-                deletePlayer();
-                editPlayer();
-                e.preventDefault();
+        let inputsText = myForm.querySelectorAll("input[type='text']");
+        let inputsNum = myForm.querySelectorAll("input[type='number']");
+        let errorValidate = document.querySelector('.error_validation');
+        let valid = true;
+
+        inputsText.forEach(input => {
+            if (!input.value.trim()) {
+                valid = false;
+                input.style.borderColor = "red";
             } else {
-                errorValidate.textContent = "all fields are required";
-                errorValidate.style.color = "red";
-
+                input.style.borderColor = "green";
             }
-        }
+        });
 
-    })
+        inputsNum.forEach(input => {
+            if (!input.value.trim() || isNaN(input.value) || input.value < 0 || input.value > 100) {
+                valid = false;
+                input.style.borderColor = "red";
+            } else {
+                input.style.borderColor = "green";
+            }
+        });
+
+        if (valid) {
+            errorValidate.textContent = "success";
+            errorValidate.style.color = "green";
+            addPlayer();
+            afficherPlayer(arrayAllPlayer);
+            deletePlayer();
+            toggleForm();
+        } else {
+            errorValidate.textContent = "all fields are required";
+            errorValidate.style.color = "red";
+        }
+    });
 }
 
-validationForm()
+validationForm();
+
 
 
 
@@ -288,8 +298,6 @@ function addPlayer() {
     let playerNationality = myForm.playerNationality;
     let playerRating = parseInt(myForm.playerRating.value) || 0;
     let mySelect = myForm.playerPosition;
-
-
 
     if (mySelect.value === "GK") {
         let playerRating = myForm.playerRating.value || 0;
@@ -364,6 +372,7 @@ function addPlayer() {
         }
     }
     myForm.reset();
+
 }
 
 
@@ -375,7 +384,6 @@ function afficherPlayer(arrayAllPlayer) {
     arrayAllPlayer.forEach((e, index) => {
         let singleCard = document.createElement("div");
         singleCard.classList.add("single");
-
         if (e.playerPosition !== "GK") {
             singleCard.innerHTML = `
                 <div class="player"> 
@@ -428,15 +436,37 @@ function afficherPlayer(arrayAllPlayer) {
                     </div>  
                 </div>`;
         }
-
         containerRemplacement.appendChild(singleCard);
+    });
+    playerClick();
+}
+
+
+function playerClick() {
+    // player ihtiyat card
+    const single = document.querySelectorAll(".single");
+    single.forEach((element) => {
+        element.addEventListener("click", () => {
+            console.log("clicked");
+            var pos = element.querySelector(".position").textContent
+            let playCards = document.querySelectorAll(".container .player");
+            playCards.forEach((playCard) => {
+                if (pos === playCard.getAttribute("data-position")) {
+                    const outer = element.outerHTML;
+                    playCard.outerHTML = outer;
+                    
+
+                }
+            });
+
+        })
     });
 }
 
 
 
-
 //***************** */ icon to affiche form ********************
+//************************************************************ */
 
 let myIconForm = document.getElementById("afficherFormIcon");
 let containerForm = document.querySelector(".container_form");
@@ -515,11 +545,13 @@ function editPlayer(i) {
     toggleForm();
 
     document.getElementById("edit_player").addEventListener("click", () => {
+        btnAddPlayer.style.display = "block";
 
+        toggleForm();
 
-        playerData.playerPosition = myForm["playerPosition"].value;
-        playerData.photoPlayer = myForm["photoPlayer"].value;
-        playerData.flag = myForm["flag"].value;
+        playerData.playerPosition = myForm["playerPosition"].value.trim();
+        playerData.photoPlayer = myForm["photoPlayer"].value.trim();
+        playerData.flag = myForm["flag"].value.trim();
         playerData.logo = myForm["logo"].value;
         playerData.playerClub = myForm["playerClub"].value;
         playerData.playerNationality = myForm["playerNationality"].value;
@@ -550,3 +582,19 @@ function editPlayer(i) {
     console.log(arrayAllPlayer);
 }
 
+
+function playCardss() {
+    let playCards = document.querySelectorAll(".player");
+    console.log(playCards);
+
+    playCards.forEach((playCard) => {
+        playCard.addEventListener("click", () => {
+            console.log(playCard);
+            console.log(playCard.getAttribute("data-position"));
+            const filtred = arrayAllPlayer.filter(e => e.playerPosition === playCard.getAttribute("data-position"));
+            afficherPlayer(filtred);
+            
+
+        });
+    });
+}

@@ -24,7 +24,7 @@ body {
     margin: 20px auto;
     width: 90%;
     height: 100vh;
-    background: url(/img/view-empty-soccer-stadium-with-fantasy-dreamy-sky.jpg);
+    background: url(img/view-empty-soccer-stadium-with-fantasy-dreamy-sky.jpg);
     background-position: center;
     background-size: cover;
     position: relative;
@@ -177,7 +177,7 @@ button:hover {
 }
 
 .player:hover {
-    transform: scale(1.2);
+    transform: scale(1.2);  
     background-color: #ff000048;
 }
 
@@ -185,8 +185,7 @@ button:hover {
 .name_player {
     background-color: #ffee37;
     width: 43%;
-    display: flex
-;
+    display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
@@ -241,14 +240,18 @@ button:hover {
     background-color: #ffffff; 
     border-radius: 15px;   
     min-width: 90%;  
+    max-width: 90%;
     height: 200px;  
     position: relative;  
     top: 20px;      
     padding: 20px;  
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
     transition: background-color 0.3s; 
-    overflow-x: auto;
     white-space: nowrap;  
+    overflow-x: scroll;
+    &::-webkit-scrollbar{
+        display: none;
+    }
 }  
 
 .single {

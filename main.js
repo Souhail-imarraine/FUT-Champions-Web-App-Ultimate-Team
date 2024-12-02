@@ -20,102 +20,96 @@ let Attaquant = [];
 let arrayAllPlayer = [];
 
 
+// object forma position
 
-
-let formations = [
-    {
-        formation: "442",
-        front: 2,
-        middle: 4,
-        last: 4,
-        goal: 1,
+const formations = {
+    442: {
+        front: ["LW", "RW"],
+        middle: ["LM", "CM", "CM", "RM"],
+        last: ["LB", "CM", "RB"],
+        goal: ["GK"],
     },
-    {
-        formation: "433",
-        front: 3,
-        middle: 3,
-        last: 4,
-        goal: 1,
-    }
-];
+    433: {
+        front: ["LW", "ST", "RW"],
+        middle: ["LM", "CM", "RM"],
+        last: ["LB", "CB", "CB", "RB"],
+        goal: ["GK"],
+    },
+};
 
-let player_card =
-    `
-              <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
-                        <img src="" alt="" class="image_player">
-                        <h3 class="name_player"></h3>
-                        <div class="flag_club_logo">
-                            <h2 class="position"></h2>
+
+const player_card = ` <div class="player empty" data-position="">
+                            <img src="" alt="" class="image_player"> 
+                            <h3 class="name_player"></h3> 
+                            <div class="flag_club_logo"> 
+                            <h2 class="position"></h2> 
                             <img src="" alt="" class="img_flag">
-                            <img src="" alt="" class="club">
-                        </div>
-                        <div class="info_player">  
-                            <p><strong class="rt"></strong></p>  
-                            <div class="child_info">
-                                <p class="info">PAC :<span> </span></p>  
-                                <p class="info">SHO :<span> </span></p>  
-                                <p class="info">PAS :<span> </span></p>  
-                            </div>
-                            <div class="child_info">
-                                <p class="info"> DRI: <span> </span></p>  
-                                <p class="info"> DEF:<span> </span></p>  
-                                <p class="info" id="phy"> PHY:<span></span></p>  
-                            </div>
-                        </div>  
-                    </div>
-  `
+                                <img src="" alt="" class="club"> </div>
+                                <div class="info_player"> 
+                                    <p><strong class="rt"></strong></p>
+                                    <div class="child_info"> 
+                                        <p class="info">PAC :<span></span></p>
+                                        <p class="info">SHO :<span></span></p> 
+                                        <p class="info">PAS :<span></span></p> 
+                                    </div> <div class="child_info"> 
+                                        <p class="info"> DRI: <span></span></p>
+                                        <p class="info"> DEF:<span></span></p>
+                                        <p class="info" id="phy"> PHY:<span></span></p> 
+                                        </div> 
+                                    </div> 
+                        </div> `;
 
-  let goalCard = `  
-                <div class="player GK"> 
-                    <i class="fa-solid fa-pen-to-square edit" style="color: #74C0FC;" ></i>
-                    <i class="fa-solid fa-delete-left delete" style="color: #ff0000;"></i>
-                    <img src="" alt="" class="image_player_added">
-                    <h3 class="name_player_added"></h3>
-                    <div class="flag_club_logo_added">
-                        <h2 class="position"></h2>
-                        <img src="" alt="" class="img_flag">
-                        <img src="" alt="" class="club">
-                    </div>
-                    <div class="info_player_added">  
-                        <p><strong class="rt"></strong></p>  
-                        <div class="child_info">
-                            <p class="info">DIV: <span></span></p>  
-                            <p class="info">HAD: <span></span></p>  
-                            <p class="info">KIK: <span></span></p>  
-                        </div>
-                        <div class="child_info">
-                            <p class="info">REF: <span></span></p>  
-                            <p class="info">SPD: <span></span></p>  
-                        </div>
-                    </div>  
-                </div>
-                    
-                `
+const goalCard = ` <div class="player empty GK" data-position="GK"> <img src="" alt="" class="image_player_added"> <h3 class="name_player_added"></h3> <div class="flag_club_logo_added"> <h2 class="position">GK</h2> <img src="" alt="" class="img_flag"> <img src="" alt="" class="club"> </div> <div class="info_player_added"> <p><strong class="rt"></strong></p> <div class="child_info"> <p class="info">DIV: <span></span></p> <p class="info">HAD: <span></span></p> <p class="info">KIK: <span></span></p> </div> <div class="child_info"> <p class="info">REF: <span></span></p> <p class="info">SPD: <span></span></p> </div> </div> </div> `;
 
 
-function cheakFormstion(formaa) {
-    formations.forEach((forma) => {
-        if (forma.formation == formaa) {
-            for (let i = 0; i < forma.front; i++) {
-                attaquant.innerHTML += player_card;
+
+// cheak forma 4-4-2 or 4-3-3
+
+function cheakFormstion(formation) {
+    const forma = formations[formation];
+
+    attaquant.innerHTML = "";
+    centerPlayer.innerHTML = "";
+    defenceur.innerHTML = "";
+    Goal.innerHTML = "";
+
+
+    forma.front.forEach((position) => {
+        let card = document.createElement("div");
+        card.innerHTML = player_card;
+        card.firstElementChild.setAttribute("data-position", position);
+        attaquant.appendChild(card.firstElementChild);
+    });
+    forma.middle.forEach((position) => {
+        let card = document.createElement("div");
+        card.innerHTML = player_card;
+        card.firstElementChild.setAttribute("data-position", position);
+        centerPlayer.appendChild(card.firstElementChild);
+    });
+    forma.last.forEach((position) => {
+        let card = document.createElement("div");
+        card.innerHTML = player_card;
+        card.firstElementChild.setAttribute("data-position", position);
+        defenceur.appendChild(card.firstElementChild);
+    });
+    forma.goal.forEach((position) => {
+        let card = document.createElement("div");
+        card.innerHTML = goalCard;
+        card.firstElementChild.setAttribute("data-position", position);
+        Goal.appendChild(card.firstElementChild);
+    });
+    document.querySelectorAll(".player.empty").forEach((el) => {
+        el.addEventListener("click", () => {
+            if (selectedPlayerIndex !== null) {
+                addToPosition(selectedPlayerIndex, el);
+                selectedPlayerIndex = null;
             }
-            // middle players
-            for (let i = 0; i < forma.middle; i++) {
-                centerPlayer.innerHTML += player_card;
-            }
-            // last players
-            for (let i = 0; i < forma.last; i++) {
-                defenceur.innerHTML += player_card;
-            }
-            for (let i = 0; i < forma.goal; i++) {
-                Goal.innerHTML += goalCard;
-            }        
-        }
+        });
     });
 }
-
+tactiques.addEventListener("change", () => {
+    cheakFormstion(tactiques.value);
+});
 cheakFormstion("442");
 
 
@@ -127,12 +121,12 @@ function tactique() {
             centerPlayer.innerHTML = "";
             defenceur.innerHTML = "";
             cheakFormstion("442");
-        }else if (valueSelected == "433"){
+        } else if (valueSelected == "433") {
             attaquant.innerHTML = "";
             centerPlayer.innerHTML = "";
             defenceur.innerHTML = "";
             cheakFormstion("433");
-            }
+        }
     })
 }
 
@@ -266,9 +260,9 @@ function validationForm() {
                 }
             });
             if (valid) {
-                   errorValidate.textContent = "succes";
-                    errorValidate.style.color = "green";
-                    
+                errorValidate.textContent = "succes";
+                errorValidate.style.color = "green";
+
                 addPlayer();
                 afficherPlayer(arrayAllPlayer);
                 deletePlayer();
@@ -288,7 +282,7 @@ validationForm()
 
 
 
-function addPlayer(){
+function addPlayer() {
     let name = myForm.playerName;
     let playerClub = myForm.playerClub;
     let playerNationality = myForm.playerNationality;
@@ -484,19 +478,16 @@ function deletePlayer() {
 }
 
 
+
 // edit
-
-function editPlayer(i){
-    
+function editPlayer(i) {
     const playerData = arrayAllPlayer[i];
-
     const deleted = playerData.name;
-
     console.log(deleted);
 
     myForm.reset();
-    btnAddPlayer.style.display = "none";
 
+    btnAddPlayer.style.display = "none";
     myForm["playerPosition"].value = playerData.playerPosition;
     myForm["photoPlayer"].value = playerData.photoPlayer;
     myForm["flag"].value = playerData.flag;
@@ -523,21 +514,21 @@ function editPlayer(i){
     }
     toggleForm();
 
-    document.getElementById("edit_player").addEventListener("click",()=>{
+    document.getElementById("edit_player").addEventListener("click", () => {
 
 
         playerData.playerPosition = myForm["playerPosition"].value;
         playerData.photoPlayer = myForm["photoPlayer"].value;
-        playerData.flag = myForm["flag"].value ;
-        playerData.logo = myForm["logo"].value ;
-        playerData.playerClub = myForm["playerClub"].value ;
+        playerData.flag = myForm["flag"].value;
+        playerData.logo = myForm["logo"].value;
+        playerData.playerClub = myForm["playerClub"].value;
         playerData.playerNationality = myForm["playerNationality"].value;
         playerData.playerRating = myForm["playerRating"].value;
-        
+
         if (playerData.playerPosition === "GK") {
             playerData.name = myForm["playerName"].value;
-            playerData.diving = myForm["diving"].value ;
-            playerData.handling = myForm["handling"].value ;
+            playerData.diving = myForm["diving"].value;
+            playerData.handling = myForm["handling"].value;
             playerData.kicking = myForm["kicking"].value;
             playerData.reflexes = myForm["reflexes"].value;
             playerData.speed = myForm["speed"].value;
@@ -546,15 +537,16 @@ function editPlayer(i){
             playerData.pace = myForm["pace"].value;
             playerData.playerShooting = myForm["playerShooting"].value;
             playerData.playerPassing = myForm["playerPassing"].value;
-            playerData.playerDribbling = myForm["playerDribbling"].value ;
-            playerData.playerDefending = myForm["playerDefending"].value ;
+            playerData.playerDribbling = myForm["playerDribbling"].value;
+            playerData.playerDefending = myForm["playerDefending"].value;
             playerData.playerPhysical = myForm["playerPhysical"].value;
         }
 
 
         containerForm.style.display = "none"
-
+        toggleForm();
     })
     arrayAllPlayer = arrayAllPlayer.filter(element => element.name !== deleted);
     console.log(arrayAllPlayer);
 }
+

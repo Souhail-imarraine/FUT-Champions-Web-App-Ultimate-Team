@@ -166,8 +166,8 @@ button:hover {
 
 
 .player {
-    width: 150px;
-    height: 100%;
+    min-width: 150px;
+    max-width: 150px;
     background-image: url(/img/p_rare_gold.png);
     background-position: center;
     background-repeat: no-repeat;
@@ -175,6 +175,7 @@ button:hover {
     position: relative;
     cursor: pointer;
 }
+
 .player:hover {
     transform: scale(1.2);
     background-color: #ff000048;
@@ -183,44 +184,49 @@ button:hover {
 
 .name_player {
     background-color: #ffee37;
-    width: 64.2px;
-    display: flex;
+    width: 43%;
+    display: flex
+;
     justify-content: center;
     align-items: center;
     position: absolute;
     font-size: 8px;
-    top: 88px;
-    left: 52px;
+    top: 48%;
+    left: 34.7%;
     overflow: hidden;
-    font-size: 5px;
+    font-size: 4px;
     text-align: center;
     height: 13px;
 }
+
 .image_player {
-    width: 57px;
+    width: 44%;
     position: absolute;
-    left: 55px;
-    bottom: 96.5px;
+    left: 33%;
+    bottom: 52%;
 }
 
 
 
 .rt {
     position: absolute;
-    top: 25px;
-    right: 66px;
-    font-size: 12px;
+    top: 33%;
+    right: 109%;
+    font-size: 26%;
     background-color: rgb(255, 255, 255);
     border-bottom-left-radius: 8px;
 }
+
+
 .flag_club_logo {
     position: absolute;
-    left: 36px;
-    top: 41px;
+    left: 23%;
+    top: 19%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 50px;
+    align-items: center;
+    height: 35%;
 }
 
 .child_info {
@@ -342,10 +348,10 @@ span{
     justify-content: center;
     align-items: center;
     position: relative;
-    top: 103px;
+    top: 57%;
     font-size: 46px;
     width: fit-content;
-    left: 54px;
+    left: 36%;
 }
 
 .position {
@@ -389,7 +395,7 @@ display: block;
     justify-content: flex-start;
     align-items: center;
     margin: 20px;
-    width: 90%;
+    width: fit-content;
     position: absolute;
     top: 230px;
     left: 80px;
@@ -481,11 +487,11 @@ display: block;
 }
 
 
+
 @media screen and (max-width: 768px) {
     
     .tactique {
-        display: flex
-    ;
+        display: flex;
         justify-content: flex-start;
         align-items: center;
         margin: 20px;
@@ -494,7 +500,32 @@ display: block;
         left: 24px;
         z-index: 111;
     }
-    .image_player{
-        bottom: 103px;
+    .card_player_one {
+        scale: 0.6;
+        width: auto;
+    }
+
+    .card_player_one {
+        scale: 0.7;
     }
 }
+@media screen and (max-width: 430px) {
+    .card_player_one {
+        scale: 0.6;
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 366px) {
+    .card_player_one {
+        scale: 0.5;
+        width: auto;
+    }
+}
+@media screen and (max-width: 320px) {
+    .card_player_one {
+        scale: 0.5;
+        width: auto;
+    }
+}
+

@@ -19,7 +19,7 @@ let Attaquant = [];
 let arrayAllPlayer = [];
 
 
-// object forma position
+// object forma position    
 
 const formations = {
     "442": {
@@ -36,10 +36,10 @@ const formations = {
     },
 };
 
+
+
 const player_card = ` 
                     <div class="player">
-                        <i class="fa-solid fa-pen-to-square" style="color: #74C0FC;" id="edit"></i>
-                        <i class="fa-solid fa-delete-left" style="color: #ff0000;" id="delete"></i>
                         <img src="" alt="" class="image_player">
                         <h3 class="name_player"></h3>
                         <div class="flag_club_logo">
@@ -87,17 +87,17 @@ const goalCard = `
                     </div> 
     `;
 
+
 // cheak forma 4-4-2 or 4-3-3
 
-function cheakFormstion(formation) {
+function checkFormation(formation) {
     const forma = formations[formation];
-    
     attaquant.innerHTML = "";
     centerPlayer.innerHTML = "";
     defenceur.innerHTML = "";
     Goal.innerHTML = "";
 
-
+    // "442 or 433"
     forma.front.forEach((position) => {
         let card = document.createElement("div");
         card.innerHTML = player_card;
@@ -130,52 +130,49 @@ function cheakFormstion(formation) {
         Goal.appendChild(card.firstElementChild);
     });
 
+
+    // 
     playCardss()
 }
 
 tactiques.addEventListener("change", () => {
-    cheakFormstion(tactiques.value);
+    checkFormation(tactiques.value);
     console.log(typeof tactiques.value);
 });
 
+checkFormation("442");
 
-cheakFormstion("442");
-
-
-/* ***************************
-***** validation form  ******
-*****************************/
 
 let myForm = document.forms.playerForm;
 let position = myForm.playerPosition;
 
+// select position 
 function playerPosition() {
     let containerInfoForm = document.querySelector(".container_info_form");
     position.addEventListener("change", () => {
         let positionValue = position.value;
         // containerInfoForm.innerHTML = ""; 
-
         if (positionValue === "GK") {
             containerInfoForm.innerHTML = `
                 <div class="attribute-input">  
                     <label for="diving">Diving:</label>
-                    <input type="number" id="diving" name="diving" min="0" max="100" placeholder="89" >                   
+                    <input type="number" id="diving" name="diving"  placeholder="89" >                   
                 </div>
                 <div class="attribute-input">  
                     <label for="handling">Handling:</label>
-                    <input type="number" id="handling" name="handling" min="0" max="100" placeholder="90" >                  
+                    <input type="number" id="handling" name="handling"  placeholder="90" >                  
                 </div>
                 <div class="attribute-input">  
                     <label for="kicking">Kicking:</label>
-                    <input type="number" id="kicking" name="kicking" min="0" max="100" placeholder="78" >                
+                    <input type="number" id="kicking" name="kicking"  placeholder="78" >                
                 </div>
                 <div class="attribute-input">  
                     <label for="reflexes">Reflexes:</label>
-                    <input type="number" id="reflexes" name="reflexes" min="0" max="100" placeholder="99" >              
+                    <input type="number" id="reflexes" name="reflexes"  placeholder="99" >              
                 </div>
                 <div class="attribute-input">  
                     <label for="speed">Speed:</label>
-                    <input type="number" id="speed" name="speed" min="0" max="100" placeholder="50" >             
+                    <input type="number" id="speed" name="speed"  placeholder="50" >             
                 </div>
                 <div class="attribute-input">  
                     <label for="photoPlayer">Photo:</label>
@@ -196,32 +193,32 @@ function playerPosition() {
 
                             <div class="attribute-input">  
                                 <label for="playerPace">Pace:</label>  
-                                <input type="number" id="playerPace" name="pace" min="0" max="99" placeholder="Enter pace (0-99)">  
+                                <input type="number" id="playerPace" name="pace"  placeholder="Enter pace (0-99)">  
                             </div>  
     
                             <div class="attribute-input">  
                                 <label for="playerShooting">Shooting:</label>  
-                                <input type="number" id="playerShooting" name="playerShooting" min="0" max="99" placeholder="Enter shooting (0-99)">  
+                                <input type="number" id="playerShooting" name="playerShooting"  placeholder="Enter shooting (0-99)">  
                             </div>  
     
                             <div class="attribute-input">  
                                 <label for="playerPassing">Passing:</label>  
-                                <input type="number" id="playerPassing" name="playerPassing" min="0" max="99" placeholder="Enter passing (0-99)">  
+                                <input type="number" id="playerPassing" name="playerPassing"  placeholder="Enter passing (0-99)">  
                             </div>  
     
                             <div class="attribute-input">  
                                 <label for="playerDribbling">Dribbling:</label>  
-                                <input type="number" id="playerDribbling" name="playerDribbling" min="0" max="99" placeholder="Enter dribbling (0-99)">  
+                                <input type="number" id="playerDribbling" name="playerDribbling"  placeholder="Enter dribbling (0-99)">  
                             </div>  
     
                             <div class="attribute-input">  
                                 <label for="playerDefending">Defending:</label>  
-                                <input type="number" id="playerDefending" name="playerDefending" min="0" max="99" placeholder="Enter defending (0-99)">  
+                                <input type="number" id="playerDefending" name="playerDefending"  placeholder="Enter defending (0-99)">  
                             </div>  
     
                             <div class="attribute-input">  
                                 <label for="playerPhysical">Physical:</label>  
-                                <input type="number" id="playerPhysical" name="playerPhysical" min="0" max="99" placeholder="Enter physical (0-99)">  
+                                <input type="number" id="playerPhysical" name="playerPhysical" placeholder="Enter physical (0-99)">  
                             </div>  
     
                             <div class="attribute-input">  
@@ -243,8 +240,12 @@ function playerPosition() {
 
 playerPosition();
 
-let btnAddPlayer = document.getElementById("Add_player");
 
+/* ***************************
+***** validation form  ******
+*****************************/
+
+let btnAddPlayer = document.getElementById("Add_player");
 
 function validationForm() {
     myForm.addEventListener("submit", (e) => {
@@ -254,6 +255,7 @@ function validationForm() {
         let inputsNum = myForm.querySelectorAll("input[type='number']");
         let errorValidate = document.querySelector('.error_validation');
         let valid = true;
+
 
         inputsText.forEach(input => {
             if (!input.value.trim()) {
@@ -279,7 +281,8 @@ function validationForm() {
             addPlayer();
             afficherPlayer(arrayAllPlayer);
             deletePlayer();
-            toggleForm();
+            // toggleForm();
+            myForm.reset();
         } else {
             errorValidate.textContent = "all fields are required";
             errorValidate.style.color = "red";
@@ -290,8 +293,7 @@ function validationForm() {
 validationForm();
 
 
-
-
+// ajouter player 
 function addPlayer() {
     let name = myForm.playerName;
     let playerClub = myForm.playerClub;
@@ -372,7 +374,7 @@ function addPlayer() {
         }
     }
     myForm.reset();
-
+    toggleForm()
 }
 
 
@@ -384,6 +386,7 @@ function afficherPlayer(arrayAllPlayer) {
     arrayAllPlayer.forEach((e, index) => {
         let singleCard = document.createElement("div");
         singleCard.classList.add("single");
+
         if (e.playerPosition !== "GK") {
             singleCard.innerHTML = `
                 <div class="player"> 
@@ -438,30 +441,11 @@ function afficherPlayer(arrayAllPlayer) {
         }
         containerRemplacement.appendChild(singleCard);
     });
+
     playerClick();
 }
 
 
-function playerClick() {
-    // player ihtiyat card
-    const single = document.querySelectorAll(".single");
-    single.forEach((element) => {
-        element.addEventListener("click", () => {
-            console.log("clicked");
-            var pos = element.querySelector(".position").textContent
-            let playCards = document.querySelectorAll(".container .player");
-            playCards.forEach((playCard) => {
-                if (pos === playCard.getAttribute("data-position")) {
-                    const outer = element.outerHTML;
-                    playCard.outerHTML = outer;
-                    
-
-                }
-            });
-
-        })
-    });
-}
 
 
 
@@ -478,6 +462,7 @@ function toggleForm() {
         myIconForm.classList.add("fa-xmark");
         myIconForm.classList.remove("fa-plus");
         myIconForm.style.display = "none";
+
     } else {
         containerForm.style.display = "none";
         myIconForm.classList.add("fa-plus");
@@ -496,7 +481,7 @@ function deletePlayer() {
     let btnIcon = document.querySelectorAll(".fa-delete-left");
     btnIcon.forEach((btn) => {
         btn.addEventListener("click", function (e) {
-            var filter = arrayAllPlayer.findIndex(ele => ele.name.trim().toLowerCase() === e.target.parentNode.querySelector(".name_player_added").textContent.trim().toLowerCase());
+            var filter = arrayAllPlayer.findIndex(ele => ele.name.trim() === e.target.parentNode.querySelector(".name_player_added").textContent.trim());
             console.log(filter);
             if (filter > -1 && filter < arrayAllPlayer.length) {
                 arrayAllPlayer.splice(filter, 1);
@@ -504,7 +489,6 @@ function deletePlayer() {
             afficherPlayer(arrayAllPlayer);
         })
     })
-
 }
 
 
@@ -583,18 +567,69 @@ function editPlayer(i) {
 }
 
 
+// add player in container 
 function playCardss() {
     let playCards = document.querySelectorAll(".player");
-    console.log(playCards);
-
+    // console.log(playCards);
     playCards.forEach((playCard) => {
         playCard.addEventListener("click", () => {
             console.log(playCard);
-            console.log(playCard.getAttribute("data-position"));
             const filtred = arrayAllPlayer.filter(e => e.playerPosition === playCard.getAttribute("data-position"));
             afficherPlayer(filtred);
-            
-
         });
     });
 }
+
+
+
+
+function playerClick() {
+    // player ihtiyat card
+    const single = document.querySelectorAll(".single");
+    single.forEach((element) => {
+        element.addEventListener("click", () => {
+            // console.log("clicked");
+            var pos = element.querySelector(".position").textContent
+            let playCards = document.querySelectorAll(".container .player");
+            playCards.forEach((playCard) => {
+                if (pos === playCard.getAttribute("data-position")) {
+                    const outer = element.outerHTML;
+                    playCard.outerHTML = outer;
+                }
+            });
+
+        })
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let playCardss = document.querySelectorAll(".player");
+console.log(playCardss);
+
+let rating
+playCardss.forEach((ele) => {
+    console.log(ele)
+})
+
+
+
+let some = 0;
+
+let rt = document.querySelectorAll(".rt");
+rt.forEach((rting) => {
+     console.log(some += +rting.textContent);
+ })
